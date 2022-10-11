@@ -22,6 +22,10 @@ int main(void) {
     int i;
     printf("Saisissez le nombre maximal :\n");
     scanf("%d", &i);
+    char a = 'a';
+    char b = 'A';
+    printf("%d\n",a);
+    printf("%d\n",b);
     nb_parfait(i);
     return EXIT_SUCCESS;
 }
