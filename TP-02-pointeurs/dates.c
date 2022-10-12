@@ -55,7 +55,10 @@ Date creerDateParCopie(){
 }
 
 Date *newDate(){
-    return malloc(sizeof(Date));
+    Date *d;
+    d=malloc(sizeof(Date));
+    initialiseDate(d);
+    return d;
 }
 
 int main(void) {
