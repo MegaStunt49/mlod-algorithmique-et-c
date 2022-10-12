@@ -48,9 +48,15 @@ void afficheDate(Date *d){
     printf(" %d \n",a);
 }
 
-int main(void) {
+Date creerDateParCopie(){
     Date d;
     initialiseDate(&d);
+    return d;
+}
+
+int main(void) {
+    Date d;
+    d = creerDateParCopie();
     afficheDate(&d);
     return EXIT_SUCCESS;
 }
