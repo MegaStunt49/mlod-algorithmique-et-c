@@ -54,9 +54,14 @@ Date creerDateParCopie(){
     return d;
 }
 
+Date *newDate(){
+    return malloc(sizeof(Date));
+}
+
 int main(void) {
-    Date d;
-    d = creerDateParCopie();
-    afficheDate(&d);
+    Date *date;
+    date = newDate();
+    afficheDate(date);
+    free(date);
     return EXIT_SUCCESS;
 }
