@@ -83,8 +83,22 @@ bool dateValide(Date uneDate){
     return nbreJours(uneDate.mois,uneDate.annee)>=uneDate.jour && uneDate.jour>0 && uneDate.mois<=12;
 }
 
+unsigned int jourDansAnnee(Date uneDate){
+    if (!dateValide(uneDate)){
+        return 0;
+    }
+    int s=0;
+    Mois m;
+    int an = uneDate.annee;
+    for (int i = 1; i<uneDate.mois;i++){
+        m=i;
+        s+=nbreJours(m,an);
+    }
+    return s+uneDate.jour;
+}
+
 int main(void) {
     Date d = creerDateParCopie();
-    printf("%d\n",dateValide(d));
+    printf("%d\n",jourDansAnnee(d));
     return EXIT_SUCCESS;
 }
