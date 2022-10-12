@@ -27,15 +27,15 @@ int scanLineAsInt(){
 }
 
 WinnerPrix *readWinners(){
-    
+    int N = scanLineAsInt();
+    WinnerPrix *d;
+    d=malloc(sizeof(WinnerPrix[N]));
+    (*d).annee = 42;
+    return d;
 }
 
 int main(void){
-	int nbGagnants = scanLineAsInt();
-	printf("nbGagnants = %i\n",nbGagnants);
-	int yearFirstWinner = scanLineAsInt();
-	printf("yearFirstWinner = %i\n",yearFirstWinner);
-	char *nameFirstWinner = scanLine();
-	printf("nameFirstWinner = %s\n",nameFirstWinner);
+    WinnerPrix *d;
+    d = readWinners;
 	return EXIT_SUCCESS;
 }
