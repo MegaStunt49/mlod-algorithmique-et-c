@@ -30,14 +30,21 @@ Frac additionSimpl(Frac f1, Frac f2){
     return simplifie(f);
 }
 
+Frac H(int N){
+    Frac f;
+    f.numerateur=1;
+    f.denominateur=N;
+    if (N<=1){
+        return f;
+    }
+    return additionSimpl(f,H(N-1));
+}
+
 int main(void) {
-    Frac f1;
-    f1.numerateur=420;
-    f1.denominateur=600;
-    Frac f2;
-    f2.numerateur=300;
-    f2.denominateur=600;
-    Frac f=additionSimpl(f1,f2);
-    printf("%d\n%d\n",f.numerateur,f.denominateur);
+    int N;
+    printf("Saisir N :\n");
+    scanf("%d",&N);
+    Frac f=H(N);
+    printf("La Somme vaux :\n%d\n%d\n",f.numerateur,f.denominateur);
     return EXIT_SUCCESS;
 }
