@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "prixTuring.h"
 
 char* scanLine(){
 	int maxLineSize = 255;
@@ -25,6 +26,9 @@ int scanLineAsInt(){
 	return buf;
 }
 
+WinnerPrix *readWinners(){
+    
+}
 
 int main(void){
 	int nbGagnants = scanLineAsInt();
