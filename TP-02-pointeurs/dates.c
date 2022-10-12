@@ -32,9 +32,9 @@ void initialiseDate(Date *d){
     d->jour = i;
     printf("Saisissez le numéro du mois :\n");
     scanf("%d", &mi);
-    m=mi-1;
+    m=mi;
     d->mois = m;
-    printf("Saisissez l'année' :\n");
+    printf("Saisissez l'année :\n");
     scanf("%d", &a);
     d->annee = a;
 }
@@ -79,7 +79,12 @@ unsigned int nbreJours(Mois mois, unsigned int annee){
     return 0;
 }
 
+bool dateValide(Date uneDate){
+    return nbreJours(uneDate.mois,uneDate.annee)>=uneDate.jour && uneDate.jour>0 && uneDate.mois<=12;
+}
+
 int main(void) {
-    printf("%d\n",nbreJours(Fevrier,2000));
+    Date d = creerDateParCopie();
+    printf("%d\n",dateValide(d));
     return EXIT_SUCCESS;
 }
