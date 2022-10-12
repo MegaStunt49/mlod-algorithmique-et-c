@@ -23,11 +23,21 @@ Frac simplifie(Frac fr){
     return frf;
 }
 
-int main(void) {
+Frac additionSimpl(Frac f1, Frac f2){
     Frac f;
-    f.numerateur=420;
-    f.denominateur=600;
-    Frac simplef=simplifie(f);
-    printf("%d\n%d\n",simplef.numerateur,simplef.denominateur);
+    f.numerateur=f1.numerateur*f2.denominateur+f1.denominateur*f2.numerateur;
+    f.denominateur=f1.denominateur*f2.denominateur;
+    return simplifie(f);
+}
+
+int main(void) {
+    Frac f1;
+    f1.numerateur=420;
+    f1.denominateur=600;
+    Frac f2;
+    f2.numerateur=300;
+    f2.denominateur=600;
+    Frac f=additionSimpl(f1,f2);
+    printf("%d\n%d\n",f.numerateur,f.denominateur);
     return EXIT_SUCCESS;
 }
