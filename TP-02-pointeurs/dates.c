@@ -61,10 +61,25 @@ Date *newDate(){
     return d;
 }
 
+unsigned int nbreJours(Mois mois, unsigned int annee){
+    switch (mois){
+        case Janvier: return 31;
+        case Fevrier: return (annee%4==0 && annee%100!=0) || annee%400==0 ? 29 : 28 ;
+        case Mars: return 31;
+        case Avril: return 30;
+        case Mai: return 31;
+        case Juin: return 30;
+        case Juillet: return 31;
+        case Aout: return 31;
+        case Septembre: return 30;
+        case Octobre: return 31;
+        case Novembre: return 30;
+        case Decembre: return 31;
+    }
+    return 0;
+}
+
 int main(void) {
-    Date *date;
-    date = newDate();
-    afficheDate(date);
-    free(date);
+    printf("%d\n",nbreJours(Fevrier,2000));
     return EXIT_SUCCESS;
 }
