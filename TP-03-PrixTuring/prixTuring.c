@@ -32,6 +32,6 @@ int main(void){
 	int yearFirstWinner = scanLineAsInt();
 	printf("yearFirstWinner = %i\n",yearFirstWinner);
 	char *nameFirstWinner = scanLine();
-	printf("nameFirstWinner = %i\n",nameFirstWinner);
+	printf("nameFirstWinner = %s\n",nameFirstWinner);
 	return EXIT_SUCCESS;
 }
