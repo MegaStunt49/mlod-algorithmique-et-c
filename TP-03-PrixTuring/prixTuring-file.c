@@ -15,12 +15,17 @@ WinnerTabl readWinners(char* file){
 	WinnerTabl t;
     d=calloc(N,sizeof(WinnerPrix));
 	for (int i = 0; i<N; i++){
+        char *c;
         fgets(buffer, 255, f);
         int an;
         sscanf(buffer, "%d", &an);
 		d[i].annee=an;
-		d[i].nom=fgets(buffer, 255, f);
-		d[i].travaux=fgets(buffer, 255, f);
+        c = calloc(256,sizeof(char));
+        fgets(c, 255, f);
+		d[i].nom=c;
+        c = calloc(256,sizeof(char));
+        fgets(c, 255, f);
+		d[i].travaux=c;
 	}
 	t.NbLign=N;
 	t.Tabl=d;
@@ -31,11 +36,11 @@ WinnerTabl readWinners(char* file){
 void printWinners(WinnerTabl T){
 	WinnerPrix *d;
 	d = T.Tabl;
-	printf("%d",T.NbLign);
+	printf("%d\n",T.NbLign);
 	for (int i = 0; i<T.NbLign; i++){
-		printf("\n%d",d[i].annee);
+		printf("%d",d[i].annee);
 		printf("\n%s",d[i].nom);
-		printf("\n%s",d[i].travaux);
+		printf("%s",d[i].travaux);
 	}
 }
 
@@ -53,8 +58,13 @@ void infosAnnee(WinnerTabl T,int an){
 int main(int argc, char* argv[]){
     WinnerTabl T;
     T = readWinners(argv[1]);
+    printWinners(T);
 	WinnerPrix *d;
 	d = T.Tabl;
+	for (int i = 0; i<T.NbLign; i++){
+		free(d[i].nom);
+		free(d[i].travaux);
+	}
 	free(d);
 	return EXIT_SUCCESS;
 }
