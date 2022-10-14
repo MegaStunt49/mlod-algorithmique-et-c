@@ -26,16 +26,51 @@ int scanLineAsInt(){
 	return buf;
 }
 
-WinnerPrix *readWinners(){
+WinnerTabl readWinners(){
     int N = scanLineAsInt();
     WinnerPrix *d;
-    d=malloc(sizeof(WinnerPrix[N]));
-    (*d).annee = 42;
-    return d;
+	WinnerTabl t;
+    d=calloc(N,sizeof(WinnerPrix));
+	for (int i = 0; i<N; i++){
+		d[i].annee=scanLineAsInt();
+		d[i].nom=scanLine();
+		d[i].travaux=scanLine();
+	}
+	t.NbLign=N;
+	t.Tabl=d;
+    return t;
+}
+
+void printWinners(WinnerTabl T){
+	WinnerPrix *d;
+	d = T.Tabl;
+	printf("%d",T.NbLign);
+	for (int i = 0; i<T.NbLign; i++){
+		printf("\n%d",d[i].annee);
+		printf("\n%s",d[i].nom);
+		printf("\n%s",d[i].travaux);
+	}
+}
+
+void infosAnnee(int an){
+    WinnerTabl T;
+    T = readWinners();
+	WinnerPrix *d;
+	d = T.Tabl;
+	for (int i = 0; i<T.NbLign; i++){
+		if (d[i].annee==an){
+			printf("%s\n",d[i].nom);
+			printf("%s\n",d[i].travaux);
+		}
+	}
 }
 
 int main(void){
-    WinnerPrix *d;
-    d = readWinners;
+    WinnerTabl T;
+    T = readWinners();
+	WinnerPrix *d;
+	d = T.Tabl;
+	printWinners(T);
+	free(d);
 	return EXIT_SUCCESS;
 }
