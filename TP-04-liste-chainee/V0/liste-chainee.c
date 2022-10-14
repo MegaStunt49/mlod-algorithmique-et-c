@@ -38,12 +38,14 @@ void afficheElement(Element e) {
 // Attention la liste peut être vide !
 // version itérative
 void afficheListe_i(Liste l) {
-	TODO;
 }
 
 // version recursive
 void afficheListe_r(Liste l) {
-	TODO;
+	if (l!=NULL){
+		afficheElement(l->val);
+		afficheListe_r(l->suiv);
+	}
 }
 
 void detruireElement(Element e) {}
