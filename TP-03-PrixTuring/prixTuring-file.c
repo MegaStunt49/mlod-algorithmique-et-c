@@ -33,11 +33,11 @@ WinnerTabl readWinners(char* file){
     return t;
 }
 
-void printWinners(WinnerTabl T){
+void printWinners(WinnerTabl T, char *fileNam){
 	WinnerPrix *d;
 	d = T.Tabl;
     FILE* f;
-    f = fopen("out.txt","w");
+    f = fopen(fileNam,"w");
 	fprintf(f,"%d\n",T.NbLign);
 	for (int i = 0; i<T.NbLign; i++){
 		fprintf(f,"%d",d[i].annee);
@@ -58,12 +58,30 @@ void infosAnnee(WinnerTabl T,int an){
 	}
 }
 
+int compPrix(const void* v1,const void *v2){
+    
+    if (w1.annee>w2.annee){
+        return 1;
+    }
+    if (w1.annee<w2.annee){
+        return -1;
+    }
+    return 0;
+}
+
 int main(int argc, char* argv[]){
     WinnerTabl T;
     T = readWinners(argv[1]);
-    printWinners(T);
 	WinnerPrix *d;
 	d = T.Tabl;
+    if (argc>3){
+        if (strcmp(argv[3],"sort")){
+            qsort(d,T.NbLign,sizeof(WinnerPrix),compPrix);
+        }
+    }
+    printWinners(T,argv[2]);
+
+    //free
 	for (int i = 0; i<T.NbLign; i++){
 		free(d[i].nom);
 		free(d[i].travaux);
