@@ -21,6 +21,12 @@ int main(void){
 	l = ajoutTete(1,l);
 
 	afficheListe_r(l);
+	printf("\n");
+
+	detruire_r(l);
+
+	afficheListe_r(l);
+	printf("\n");
 
 	// ajoutFin_r(99,l);
 	// afficheListe_i(l);

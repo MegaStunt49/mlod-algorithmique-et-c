@@ -63,8 +63,9 @@ void detruire_i(Liste l) {
 
 // version récursive
 void detruire_r(Liste l) {
-	if (l!=NULL){
+	if (l->suiv!=NULL){
 		detruire_r(l->suiv);
+		free(l->suiv);
 		l->suiv = NULL;
 	}
 }
