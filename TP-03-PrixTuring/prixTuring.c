@@ -68,9 +68,11 @@ int main(int argc, char* argv[]){
     T = readWinners();
 	WinnerPrix *d;
 	d = T.Tabl;
-	if (argc>1){
-		if (argv[1]=="infosAnnee"){
-			infosAnnee(T,strtol(argv[2]));
+	if (argc==3){
+		if (strcmp(argv[1],"infosAnnee")==0){
+			int x;
+    		sscanf(argv[2], "%d", &x);
+			infosAnnee(T,x);
 		}
 	}
 	free(d);
