@@ -11,12 +11,20 @@ bool estVide(Liste l) {
 
 // créer une liste d'un seul élément contenant la valeur v
 Liste creer(Element v){
-	return TODO;
+	Liste l;
+	l = malloc(sizeof(Cellule));
+	l->suiv=NULL;
+	l->val=v;
+	return l;
 }
 
 // ajoute l'élément v en tete de la liste l
 Liste ajoutTete(Element v, Liste l) {
-	return TODO;
+	Liste l2;
+	l2 = malloc(sizeof(Cellule));
+	l2->suiv = l;
+	l2->val = v;
+	return l2;
 }
 
 
