@@ -5,4 +5,4 @@ typedef struct WinnerPrix{int annee; char* nom; char* travaux;} WinnerPrix;
 
 typedef struct WinnerTabl{int NbLign; WinnerPrix *Tabl;} WinnerTabl;
 
-void infosAnnee(int annee);
+void infosAnnee(WinnerTabl T,int annee);

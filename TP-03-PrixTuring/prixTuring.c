@@ -52,9 +52,7 @@ void printWinners(WinnerTabl T){
 	}
 }
 
-void infosAnnee(int an){
-    WinnerTabl T;
-    T = readWinners();
+void infosAnnee(WinnerTabl T,int an){
 	WinnerPrix *d;
 	d = T.Tabl;
 	for (int i = 0; i<T.NbLign; i++){
@@ -65,12 +63,16 @@ void infosAnnee(int an){
 	}
 }
 
-int main(void){
+int main(int argc, char* argv[]){
     WinnerTabl T;
     T = readWinners();
 	WinnerPrix *d;
 	d = T.Tabl;
-	printWinners(T);
+	if (argc>1){
+		if (argv[1]=="infosAnnee"){
+			infosAnnee(T,strtol(argv[2]));
+		}
+	}
 	free(d);
 	return EXIT_SUCCESS;
 }
