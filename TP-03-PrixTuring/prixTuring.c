@@ -75,6 +75,10 @@ int main(int argc, char* argv[]){
 			infosAnnee(T,x);
 		}
 	}
+	for (int i = 0; i<T.NbLign; i++){
+		free(d[i].nom);
+		free(d[i].travaux);
+	}
 	free(d);
 	return EXIT_SUCCESS;
 }
