@@ -58,12 +58,15 @@ void detruireElement(Element e) {}
 // Détruit tous les éléments de la liste l
 // version itérative
 void detruire_i(Liste l) {
-	TODO;
+	;
 }
 
 // version récursive
 void detruire_r(Liste l) {
-	TODO;
+	if (l!=NULL){
+		detruire_r(l->suiv);
+		l->suiv = NULL;
+	}
 }
 
 // retourne la liste dans laquelle l'élément v a été ajouté en fin
