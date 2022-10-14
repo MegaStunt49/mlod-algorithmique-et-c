@@ -7,8 +7,7 @@
 
 int main(void){
 	Liste l;
-	Element v = 3;
-	l = creer(v);
+	l = NULL;
 	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
 	l = ajoutTete(1,l);
@@ -21,7 +20,7 @@ int main(void){
 	l = ajoutTete(4,l);
 	l = ajoutTete(1,l);
 
-	afficheListe_i(l);
+	afficheListe_r(l);
 
 	// ajoutFin_r(99,l);
 	// afficheListe_i(l);
