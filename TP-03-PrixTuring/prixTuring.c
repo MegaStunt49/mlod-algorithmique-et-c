@@ -66,8 +66,6 @@ void infosAnnee(WinnerTabl T,int an){
 int main(int argc, char* argv[]){
     WinnerTabl T;
     T = readWinners();
-	WinnerPrix *d;
-	d = T.Tabl;
 	if (argc==3){
 		if (strcmp(argv[1],"infosAnnee")==0){
 			int x;
@@ -75,6 +73,10 @@ int main(int argc, char* argv[]){
 			infosAnnee(T,x);
 		}
 	}
+
+	// free
+	WinnerPrix *d;
+	d = T.Tabl;
 	for (int i = 0; i<T.NbLign; i++){
 		free(d[i].nom);
 		free(d[i].travaux);
