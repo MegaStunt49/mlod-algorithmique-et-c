@@ -59,8 +59,8 @@ void infosAnnee(int an){
 	d = T.Tabl;
 	for (int i = 0; i<T.NbLign; i++){
 		if (d[i].annee==an){
-			printf("%s\n",d[i].nom);
-			printf("%s\n",d[i].travaux);
+			printf("L'annee %d, le(s) gagnant(s) ont été : %s\n",an,d[i].nom);
+			printf("Nature des travaux : %s\n",d[i].travaux);
 		}
 	}
 }
