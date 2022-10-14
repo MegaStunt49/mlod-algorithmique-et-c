@@ -5,10 +5,10 @@
 #include "prixTuring.h"
 
 WinnerTabl readWinners(char* file){
-    FILE* f;
-    f = fopen(file,"r");
+    FILE* fr;
+    fr = fopen(file,"r");
     char buffer[255];
-    fgets(buffer, 255, f);
+    fgets(buffer, 255, fr);
 	int N;
     sscanf(buffer, "%d", &N);
     WinnerPrix *d;
@@ -16,28 +16,26 @@ WinnerTabl readWinners(char* file){
     d=calloc(N,sizeof(WinnerPrix));
 	for (int i = 0; i<N; i++){
         char *c;
-        fgets(buffer, 255, f);
+        fgets(buffer, 255, fr);
         int an;
         sscanf(buffer, "%d", &an);
 		d[i].annee=an;
         c = calloc(256,sizeof(char));
-        fgets(c, 255, f);
+        fgets(c, 255, fr);
 		d[i].nom=c;
         c = calloc(256,sizeof(char));
-        fgets(c, 255, f);
+        fgets(c, 255, fr);
 		d[i].travaux=c;
 	}
 	t.NbLign=N;
 	t.Tabl=d;
-    fclose(f);
+    fclose(fr);
     return t;
 }
 
-void printWinners(WinnerTabl T, char *fileNam){
+void printWinners(WinnerTabl T, FILE *f){
 	WinnerPrix *d;
 	d = T.Tabl;
-    FILE* f;
-    f = fopen(fileNam,"w");
 	fprintf(f,"%d\n",T.NbLign);
 	for (int i = 0; i<T.NbLign; i++){
 		fprintf(f,"%d",d[i].annee);
@@ -58,15 +56,33 @@ void infosAnnee(WinnerTabl T,int an){
 	}
 }
 
-int compPrix(const void* v1,const void *v2){
-    
-    if (w1.annee>w2.annee){
-        return 1;
-    }
-    if (w1.annee<w2.annee){
-        return -1;
-    }
-    return 0;
+WinnerTabl sortTuringWinnersByYears(WinnerTabl *T){
+    WinnerTabl tf;
+    int N = T->NbLign;
+	WinnerPrix *d;
+    d=T->Tabl;
+	WinnerPrix *df;
+    df=calloc(N,sizeof(WinnerPrix));
+    int PrevAn = 0;
+    int BestAn = 3000;
+    int IdAn = -1;
+	for (int i = 0; i<N; i++){
+        for (int j = 0; j<N; j++){
+            int antest = d[j].annee;
+            if (antest<BestAn && antest>PrevAn){
+                IdAn = j;
+                BestAn = antest;
+            }
+        }
+        PrevAn = BestAn;
+        BestAn = 3000;
+        df[i].annee=d[IdAn].annee;
+        df[i].nom=d[IdAn].nom;
+        df[i].travaux=d[IdAn].travaux;
+	}
+	tf.NbLign=N;
+	tf.Tabl=df;
+    return tf;
 }
 
 int main(int argc, char* argv[]){
@@ -74,14 +90,17 @@ int main(int argc, char* argv[]){
     T = readWinners(argv[1]);
 	WinnerPrix *d;
 	d = T.Tabl;
+    FILE* f;
+    f = fopen(argv[2],"w");
     if (argc>3){
         if (strcmp(argv[3],"sort")){
-            qsort(d,T.NbLign,sizeof(WinnerPrix),compPrix);
+            sortTuringWinnersByYears(&T);
+
         }
     }
-    printWinners(T,argv[2]);
+    printWinners(T,f);
 
-    //free
+    
 	for (int i = 0; i<T.NbLign; i++){
 		free(d[i].nom);
 		free(d[i].travaux);
