@@ -107,10 +107,6 @@ int main(int argc, char* argv[]){
             printWinners(*a,f);
             WinnerPrix *d2;
             d2= a->Tabl;
-            for (int i = 0; i<a->NbLign; i++){
-                free(d2[i].nom);
-                free(d2[i].travaux);
-            }
             free(d2);
         }
     }
