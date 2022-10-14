@@ -4,13 +4,8 @@
 #include <stdint.h>
 #include "fraction.h"
 
-int PGCD(int i1, int i2){
-    if (i2==0){
-        return i1;
-    }
-    else {
-        return PGCD(i2, i1%i2);
-    }
+int PGCD(int i1,int i2){
+    return i2==0 ? i1 : PGCD(i2, i1%i2);
 }
 
 Frac simplifie(Frac fr){
