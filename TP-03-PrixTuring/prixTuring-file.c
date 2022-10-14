@@ -36,12 +36,15 @@ WinnerTabl readWinners(char* file){
 void printWinners(WinnerTabl T){
 	WinnerPrix *d;
 	d = T.Tabl;
-	printf("%d\n",T.NbLign);
+    FILE* f;
+    f = fopen("out.txt","w");
+	fprintf(f,"%d\n",T.NbLign);
 	for (int i = 0; i<T.NbLign; i++){
-		printf("%d",d[i].annee);
-		printf("\n%s",d[i].nom);
-		printf("%s",d[i].travaux);
+		fprintf(f,"%d",d[i].annee);
+		fprintf(f,"\n%s",d[i].nom);
+		fprintf(f,"%s",d[i].travaux);
 	}
+    fclose(f);
 }
 
 void infosAnnee(WinnerTabl T,int an){
