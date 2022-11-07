@@ -80,7 +80,7 @@ int main(void){
 
 	printf("retirePremier_r(99)  : ");
 	l = retirePremier_r(99,l);
-	afficheListe_r(l);
+	afficheEnvers_r(l);
 	printf("\n");
 
 	detruire_r(l);
