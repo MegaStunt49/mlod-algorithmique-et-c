@@ -43,6 +43,7 @@ void afficheListe_i(Liste l) {
 		afficheElement(l2->val);
 		l2 = l2->suiv;
 	}
+	printf("\n");
 }
 
 // version recursive
@@ -58,27 +59,45 @@ void detruireElement(Element e) {}
 // Détruit tous les éléments de la liste l
 // version itérative
 void detruire_i(Liste l) {
-	;
+	Liste lcop = l;
+	while(lcop->suiv!=NULL){
+		Liste suivant = lcop->suiv;
+		detruireElement(lcop->val);
+		free(lcop);
+		lcop = suivant;
+	}
 }
 
 // version récursive
 void detruire_r(Liste l) {
 	if (l->suiv!=NULL){
-		detruire_r(l->suiv);
-		free(l->suiv);
-		l->suiv = NULL;
+		Liste suivant = l->suiv;
+		detruireElement(l->val);
+		free(l);
+		detruire_r(suivant);
 	}
 }
 
 // retourne la liste dans laquelle l'élément v a été ajouté en fin
 // version itérative
 Liste ajoutFin_i(Element v, Liste l) {
-	return TODO;
+	Liste lcop = l;
+	while(lcop->suiv!=NULL){
+		lcop = lcop->suiv;
+	}
+	lcop->suiv = creer(v);
+	return l;
 }
 
 // version recursive
 Liste ajoutFin_r(Element v, Liste l) {
-	return TODO;
+	if (l->suiv!=NULL){
+		ajoutFin_r( v, l->suiv);
+	}
+	else{
+		l->suiv = creer(v);
+	}
+	return l;
 }
 
 // compare deux elements

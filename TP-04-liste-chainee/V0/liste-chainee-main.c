@@ -23,16 +23,11 @@ int main(void){
 	afficheListe_r(l);
 	printf("\n");
 
-	detruire_r(l);
+	ajoutFin_i(99,l);
+	afficheListe_i(l);
 
-	afficheListe_r(l);
-	printf("\n");
-
-	// ajoutFin_r(99,l);
-	// afficheListe_i(l);
-
-	// ajoutFin_r(100,l);
-	// afficheListe_i(l);
+	ajoutFin_r(100,l);
+	afficheListe_i(l);
 
 	// p = cherche_i(200,l);
 	// printf("cherche_i(200) : %s\n",estVide(p)?"pas trouve":"[ERREUR] trouve !!!");
