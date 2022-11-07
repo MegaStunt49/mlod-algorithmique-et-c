@@ -39,5 +39,6 @@ int main(void) {
             printf(" %d ",t3.valeurs[j]);
         }
         printf("\n");
+    free(t3.valeurs);
     return EXIT_SUCCESS;
 }
