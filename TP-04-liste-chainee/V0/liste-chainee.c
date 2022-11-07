@@ -142,6 +142,7 @@ Liste retirePremier_i(Element v, Liste l) {
 		Liste lcopint = lcop->suiv;
 		if (lcopint->val == v){
 			lcop->suiv = lcopint->suiv;
+			free(lcopint);
 			return l;
 		}
 		lcop = lcopint;
@@ -152,10 +153,12 @@ Liste retirePremier_i(Element v, Liste l) {
 
 // version recursive
 Liste retirePremier_r(Element v, Liste l) {
-	if (l->val == v){return l->suiv;}
-	if (l->suiv != NULL){
-		if (l->suiv->val == v){
-			l->suiv = l->suiv->suiv;
+	Liste lsuiv = l->suiv;
+	if (l->val == v){return lsuiv;}
+	if (lsuiv != NULL){
+		if (lsuiv->val == v){
+			l->suiv = lsuiv->suiv;
+			free(lsuiv);
 			return l;
 		}
 		else{
