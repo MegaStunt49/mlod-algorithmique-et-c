@@ -60,6 +60,7 @@ void detruireElement(Element e) {}
 // version itérative
 void detruire_i(Liste l) {
 	Liste lcop = l;
+	if (estVide(l)){return NULL;}
 	while(lcop->suiv!=NULL){
 		Liste suivant = lcop->suiv;
 		detruireElement(lcop->val);
@@ -70,6 +71,7 @@ void detruire_i(Liste l) {
 
 // version récursive
 void detruire_r(Liste l) {
+	if (estVide(l)){return NULL;}
 	if (l->suiv!=NULL){
 		Liste suivant = l->suiv;
 		detruireElement(l->val);
