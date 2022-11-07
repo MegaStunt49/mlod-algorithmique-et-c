@@ -81,6 +81,10 @@ void detruire_r(Liste l) {
 // retourne la liste dans laquelle l'élément v a été ajouté en fin
 // version itérative
 Liste ajoutFin_i(Element v, Liste l) {
+	if (estVide(l)){
+		l=creer(v);
+		return l;
+	}
 	Liste lcop = l;
 	while(lcop->suiv!=NULL){
 		lcop = lcop->suiv;
@@ -91,6 +95,10 @@ Liste ajoutFin_i(Element v, Liste l) {
 
 // version recursive
 Liste ajoutFin_r(Element v, Liste l) {
+	if (estVide(l)){
+		l=creer(v);
+		return l;
+	}
 	if (l->suiv!=NULL){
 		ajoutFin_r( v, l->suiv);
 	}
@@ -128,13 +136,34 @@ Liste cherche_r(Element v,Liste l) {
 // ne fait rien si aucun élément possède cette valeur
 // version itérative
 Liste retirePremier_i(Element v, Liste l) {
-	return TODO;
+	Liste lcop = l;
+	if (lcop->val == v){return lcop->suiv;}
+	while(lcop->suiv!=NULL){
+		Liste lcopint = lcop->suiv;
+		if (lcopint->val == v){
+			lcop->suiv = lcopint->suiv;
+			return l;
+		}
+		lcop = lcopint;
+	}
+	return l;
 }
 
 
 // version recursive
 Liste retirePremier_r(Element v, Liste l) {
-	return TODO;
+	if (l->val == v){return l->suiv;}
+	if (l->suiv != NULL){
+		if (l->suiv->val == v){
+			l->suiv = l->suiv->suiv;
+			return l;
+		}
+		else{
+			retirePremier_r(v,l->suiv);
+			return l;
+		}
+	}
+	return l;
 }
 
 
