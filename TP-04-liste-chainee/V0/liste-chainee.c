@@ -108,12 +108,20 @@ bool equalsElement(Element e1, Element e2){
 // Retourne un pointeur sur l'élément de la liste l contenant la valeur v ou NULL
 // version itérative
 Liste cherche_i(Element v,Liste l) {
-	return TODO;
+	Liste lcop = l;
+	if (lcop->val == v){return lcop;}
+	while(lcop->suiv!=NULL){
+		lcop = lcop->suiv;
+		if (lcop->val == v){return lcop;}
+	}
+	return NULL;
 }
 
 // version récursive
 Liste cherche_r(Element v,Liste l) {
-	return TODO;
+	if (l->val == v){return l;}
+	if (l->suiv != NULL) {return cherche_r(v,l->suiv);}
+	return NULL;
 }
 
 // Retourne la liste modifiée dans la laquelle le premier élément ayant la valeur v a été supprimé
