@@ -4,7 +4,7 @@
 #include <string.h>
 
 void afficheElement(Element e){
-    printf("%s\n", e);
+    printf("%s ", e);
 }
 
 void detruireElement(Element e){}
