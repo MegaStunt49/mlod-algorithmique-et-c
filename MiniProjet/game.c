@@ -15,9 +15,9 @@
 
 #include <math.h>
 
-#if defined(PLATFORM_WEB)
-    #include <emscripten/emscripten.h>
-#endif
+// #if defined(PLATFORM_WEB)
+//     #include <emscripten/emscripten.h>
+// #endif
 
 //----------------------------------------------------------------------------------
 // Some Defines
