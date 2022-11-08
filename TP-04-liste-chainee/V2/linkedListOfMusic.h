@@ -1,5 +1,6 @@
 #pragma once
 
+#include "linkedList.h"
 #include <stdbool.h>
 
 typedef struct music {
@@ -12,3 +13,8 @@ typedef struct music {
     int year;
 } Music;
 
+void afficheElement(Element e);
+
+void detruireElement(Element e);
+
+bool equalsElement(Element e1, Element e2);
