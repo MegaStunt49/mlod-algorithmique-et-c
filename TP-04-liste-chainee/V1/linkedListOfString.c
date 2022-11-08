@@ -2,3 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void afficheElement(Element e){
+    
+}
