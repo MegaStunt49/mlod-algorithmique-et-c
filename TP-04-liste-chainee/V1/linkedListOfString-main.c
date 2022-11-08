@@ -7,29 +7,29 @@ int main(void){
 	l = NULL;
 	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
-	l = ajoutTete(1,l);
-	l = ajoutTete(2,l);
-	l = ajoutTete(4,l);
-	l = ajoutTete(1,l);
-	l = ajoutTete(5,l);
-	l = ajoutTete(6,l);
-	l = ajoutTete(2,l);
-	l = ajoutTete(4,l);
-	l = ajoutTete(1,l);
+	l = ajoutTete("wow",l);
+	l = ajoutTete("wow",l);
+	l = ajoutTete("w0w",l);
+	l = ajoutTete("wow",l);
+	l = ajoutTete("wow",l);
+	l = ajoutTete("wow",l);
+	l = ajoutTete("w0w",l);
+	l = ajoutTete("wow",l);
+	l = ajoutTete("wow",l);
 
 	afficheListe_r(l);
 	printf("\n");
 
-	ajoutFin_i(99,l);
+	ajoutFin_i("99",l);
 	afficheListe_i(l);
 
-	ajoutFin_r(100,l);
+	ajoutFin_r("100",l);
 	afficheListe_i(l);
 
-	Liste p = cherche_i(200,l);
+	Liste p = cherche_i("200",l);
 	printf("cherche_i(200) : %s\n",estVide(p)?"pas trouve":"[ERREUR] trouve !!!");
 
-	p = cherche_i(99,l);
+	p = cherche_i("99",l);
 	if(estVide(p))
 		printf("cherche_i(99) : [ERREUR] pas trouve \n");
 	else {
@@ -38,10 +38,10 @@ int main(void){
 	 	printf("\n");
 	}
 
-	p = cherche_r(200,l);
+	p = cherche_r("200",l);
 	printf("cherche_r(200) : %s\n",estVide(p)?"pas trouve":"[ERREUR] trouve !!!");
 
-	p = cherche_r(99,l);
+	p = cherche_r("99",l);
 	if(estVide(p))
 		printf("cherche_r(99) : [ERREUR] pas trouve \n");
 	else {
@@ -51,32 +51,32 @@ int main(void){
 	}
 
 	printf("retirePremier_i(1)   : ");
-	l = retirePremier_i(1,l);
+	l = retirePremier_i("w0w",l);
 	afficheListe_r(l);
 	printf("\n");
 
 	printf("retirePremier_i(1)   : ");
-	l = retirePremier_i(1,l);
+	l = retirePremier_i("wow",l);
 	afficheListe_r(l);
 	printf("\n");
 
 	printf("retirePremier_i(100) : ");
-	l = retirePremier_i(100,l);
+	l = retirePremier_i("100",l);
 	afficheListe_r(l);
 	printf("\n");
 
 	printf("retirePremier_r(4)   : ");
-	l = retirePremier_r(4,l);
+	l = retirePremier_r("wow",l);
 	afficheListe_r(l);
 	printf("\n");
 
 	printf("retirePremier_r(4)   : ");
-	l = retirePremier_r(4,l);
+	l = retirePremier_r("w0w",l);
 	afficheListe_r(l);
 	printf("\n");
 
 	printf("retirePremier_r(99)  : ");
-	l = retirePremier_r(99,l);
+	l = retirePremier_r("99",l);
 	afficheEnvers_r(l);
 	printf("\n");
 
