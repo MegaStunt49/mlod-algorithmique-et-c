@@ -30,9 +30,9 @@ Liste creer(Music v);
 // ajoute l'élément v en tete de la liste l
 Liste ajoutTete(Music v, Liste l);
 
-extern void afficheMusic(Music e);
+void afficheMusic(Music e);
 
-extern bool equalsMusic(Music e1, Music e2);
+bool equalsMusic(Music e1, Music e2);
 
 // affiche tous les éléments de la liste l
 // Attention, cette fonction doit être indépendante du type des éléments de la liste
@@ -44,7 +44,7 @@ void afficheListe_i(Liste l);
 // version recursive
 void afficheListe_r(Liste l);
 
-extern void detruireMusic(Music e);
+void detruireMusic(Music e);
 
 // Détruit tous les éléments de la liste l
 // version itérative
