@@ -17,9 +17,10 @@ int main(void){
     music.trackNumber = 1;
     music.year = 1969;
 
-	l = creer(&music);
+    Element elem;
+    elem = &music;
 
-    afficheListe_r(l);
+    afficheElement(elem);
 
 	detruire_r(l);
 

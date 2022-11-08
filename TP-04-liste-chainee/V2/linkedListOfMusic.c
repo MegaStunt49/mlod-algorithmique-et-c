@@ -6,7 +6,7 @@
 
 
 void afficheElement(Element e){
-    printf("%s from %s ;", ((Music*)e)->name, ((Music*)e)->artist);
+    printf("%s the %s music from %s in the album %s from year %d, disc %d track n°%d\n", ((Music*)e)->name, ((Music*)e)->genre, ((Music*)e)->artist, ((Music*)e)->album, ((Music*)e)->year, ((Music*)e)->diskNumber, ((Music*)e)->trackNumber);
 }
 
 void detruireElement(Element e){}
