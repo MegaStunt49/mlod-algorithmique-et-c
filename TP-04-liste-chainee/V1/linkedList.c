@@ -110,17 +110,17 @@ bool equalsElement(Element e1, Element e2){
 // version itérative
 Liste cherche_i(Element v,Liste l) {
 	Liste lcop = l;
-	if (lcop->val == v){return lcop;}
+	if (equalsElement(lcop->val, v)){return lcop;}
 	while(lcop->suiv!=NULL){
 		lcop = lcop->suiv;
-		if (lcop->val == v){return lcop;}
+		if (equalsElement(lcop->val, v)){return lcop;}
 	}
 	return NULL;
 }
 
 // version récursive
 Liste cherche_r(Element v,Liste l) {
-	if (l->val == v){return l;}
+	if (equalsElement(l->val, v)){return l;}
 	if (l->suiv != NULL) {return cherche_r(v,l->suiv);}
 	return NULL;
 }
@@ -130,10 +130,10 @@ Liste cherche_r(Element v,Liste l) {
 // version itérative
 Liste retirePremier_i(Element v, Liste l) {
 	Liste lcop = l;
-	if (lcop->val == v){return lcop->suiv;}
+	if (equalsElement(lcop->val, v)){return lcop->suiv;}
 	while(lcop->suiv!=NULL){
 		Liste lcopint = lcop->suiv;
-		if (lcopint->val == v){
+		if (equalsElement(lcopint->val, v)){
 			lcop->suiv = lcopint->suiv;
 			free(lcopint);
 			return l;
@@ -147,9 +147,9 @@ Liste retirePremier_i(Element v, Liste l) {
 // version recursive
 Liste retirePremier_r(Element v, Liste l) {
 	Liste lsuiv = l->suiv;
-	if (l->val == v){return lsuiv;}
+	if (equalsElement(l->val, v)){return lsuiv;}
 	if (lsuiv != NULL){
-		if (lsuiv->val == v){
+		if (equalsElement(lsuiv->val, v)){
 			l->suiv = lsuiv->suiv;
 			free(lsuiv);
 			return l;
