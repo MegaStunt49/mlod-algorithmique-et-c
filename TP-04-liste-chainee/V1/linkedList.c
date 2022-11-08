@@ -66,7 +66,7 @@ void detruire_i(Liste l) {
 void detruire_r(Liste l) {
 	if (!estVide(l)){
 		detruireElement(l->val);
-		detruire_r(l);
+		detruire_r(l->suiv);
 		free(l);
 	}
 }

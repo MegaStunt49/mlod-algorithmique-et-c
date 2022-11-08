@@ -8,21 +8,22 @@ int main(void){
 	l = NULL;
 	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
-    Music music;
-    music.artist = "bob";
-    music.album = "wow";
-    music.name = "lullaby";
-    music.genre = "hard rock";
-    music.diskNumber = 1;
-    music.trackNumber = 1;
-    music.year = 1969;
+    Music* elem;
+    elem = malloc(sizeof(Music));
+    elem->artist = "bob";
+    elem->album = "wow";
+    elem->name = "lullaby";
+    elem->genre = "hard rock";
+    elem->diskNumber = 1;
+    elem->trackNumber = 1;
+    elem->year = 1969;
 
-    Element elem;
-    elem = &music;
 
-    afficheElement(elem);
+    l = ajoutTete(elem,l);
 
-	detruire_r(l);
+    afficheListe_r(l);
+
+	detruire_i(l);
 
 	return EXIT_SUCCESS;
 }
