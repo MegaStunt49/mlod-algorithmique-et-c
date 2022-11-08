@@ -8,3 +8,6 @@ void afficheElement(Element e){
 
 void detruireElement(Element e){}
 
+bool equalsElement(Element e1, Element e2){
+    
+}
