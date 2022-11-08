@@ -24,6 +24,8 @@ Liste ajoutTete(Element v, Liste l);
 
 extern void afficheElement(Element e);
 
+extern bool equalsElement(Element e1, Element e2);
+
 // affiche tous les éléments de la liste l
 // Attention, cette fonction doit être indépendante du type des éléments de la liste
 // utiliser une fonction annexe affiche_element
