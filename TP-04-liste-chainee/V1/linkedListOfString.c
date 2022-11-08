@@ -1,6 +1,7 @@
 #include "linkedList.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 void afficheElement(Element e){
     printf("%s\n", e);
@@ -9,5 +10,5 @@ void afficheElement(Element e){
 void detruireElement(Element e){}
 
 bool equalsElement(Element e1, Element e2){
-    
+    return !strcmp(e1,e2);
 }
