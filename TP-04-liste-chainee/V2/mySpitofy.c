@@ -23,7 +23,7 @@ int main(void){
 
     afficheListe_r(l);
 
-	detruire_i(l);
+	detruire_r(l);
 
 	return EXIT_SUCCESS;
 }
