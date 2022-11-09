@@ -18,7 +18,7 @@ Liste read_csv(char* file){
     buffer = calloc(256,sizeof(char));
     fgets(buffer, 255, fr);
     while(buffer[0]!= '\n' ){
-        ajoutTete(creerElement(buffer),l);
+        ajoutFin_i(creerElement(buffer),l);
         buffer = calloc(256,sizeof(char));
         fgets(buffer, 255, fr);
     }

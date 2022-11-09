@@ -27,9 +27,14 @@ Element creerElement(char* ligne){
     ptr = strtok(NULL, delim);
     elem->genre = ptr;
     ptr = strtok(NULL, delim);
-    int dN;
-    sscanf(ptr, "%d", &dN);
-    elem->diskNumber = dN;
+    if (ptr[0]!='\0'){
+        int dN;
+        sscanf(ptr, "%d", &dN);
+        elem->diskNumber = dN;
+    }
+    else{
+        elem->diskNumber = 0;
+    }
     ptr = strtok(NULL, delim);
     int tN;
     sscanf(ptr, "%d", &tN);
