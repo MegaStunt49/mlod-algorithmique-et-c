@@ -28,6 +28,16 @@ String string_new(char* str){
     return newStr;
 }
 
+unsigned int string_length(String str){
+    unsigned int s = 0;
+    String scop = str;
+    while (scop!=NULL){
+        s += scop->chunkSize;
+        scop = scop->next;
+    }
+    return s;
+}
+
 void detruire_r(String str){
     if (str!=NULL){
         free(str->chunk);
@@ -36,9 +46,44 @@ void detruire_r(String str){
     }
 }
 
+String add_fin(String str, String str2){
+    if(str->next!=NULL){
+        add_fin(str->next,str2);
+    }
+    else{
+        str->next=str2;
+    }
+    return str;
+}
+
+String string_insert_at(String str, unsigned int pos, char* strAdd){
+    if (str->chunkSize<pos){
+        if(str->next!=NULL){
+            str->next=string_insert_at(str->next, pos-(str->chunkSize), strAdd);
+        }
+        else {
+            str->next=string_new(strAdd);
+        }
+        return str;
+    }
+    else{
+        char* content = str->chunk;
+        String strN = string_new(strAdd);
+        free(str->chunk);
+        for (int i = 0; i<(pos-1); i++){
+            str->chunk[i]=content[i]
+        }
+        strN=string_insert_at(strN,string_length(strN)+1,&(content[pos-1]));
+        strN = add_fin(strN,str->next);
+        str->next=strN;
+        return str;
+    }
+}
+
 int main(void){
     String s = string_new("HELLO !");
     printf("%s%s\n",s->chunk,s->next->chunk);
+    printf("%d\n",string_length(s));
     detruire_r(s);
 	return EXIT_SUCCESS;
 }
