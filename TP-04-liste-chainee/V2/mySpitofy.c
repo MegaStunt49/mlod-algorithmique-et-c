@@ -1,6 +1,5 @@
 // gcc -W -Wall -Wno-unused-parameter -std=c99 linkedList.c linkedListOfMusic.c mySpitofy.c -o mySpitofy
 
-#include "linkedList.h"
 #include "linkedListOfMusic.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,15 +9,20 @@
 Liste read_csv(char* file){
     FILE* fr;
     fr = fopen(file,"r");
-    char buffer[255];
-    fgets(buffer, 255, fr);
+    char dump[255];
+    fgets(dump, 255, fr);
+    char* buffer = calloc(256,sizeof(char));
     fgets(buffer, 255, fr);
     Liste l;
-    l=NULL;
-    while(buffer[0]!= EOF ){
-        ajoutFin_r(creerElement(buffer),l);
+    l=creer(creerElement(buffer));
+    buffer = calloc(256,sizeof(char));
+    fgets(buffer, 255, fr);
+    while(buffer[0]!= '\n' ){
+        ajoutTete(creerElement(buffer),l);
+        buffer = calloc(256,sizeof(char));
         fgets(buffer, 255, fr);
     }
+    free(buffer);
     fclose(fr);
     return l;
 }

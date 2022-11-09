@@ -10,6 +10,7 @@ void afficheElement(Element e){
 }
 
 void detruireElement(Element e){
+    free(((Music*)e)->name);
     free(e);
 }
 
