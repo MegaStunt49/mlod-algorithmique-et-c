@@ -71,7 +71,7 @@ String string_insert_at(String str, unsigned int pos, char* strAdd){
         String strN = string_new(strAdd);
         free(str->chunk);
         for (int i = 0; i<(pos-1); i++){
-            str->chunk[i]=content[i]
+            str->chunk[i]=content[i];
         }
         strN=string_insert_at(strN,string_length(strN)+1,&(content[pos-1]));
         strN = add_fin(strN,str->next);
@@ -84,6 +84,13 @@ int main(void){
     String s = string_new("HELLO !");
     printf("%s%s\n",s->chunk,s->next->chunk);
     printf("%d\n",string_length(s));
+    s = string_insert_at(s,7,"les pros du C");
+    String s1=s;
+    while(s1!=NULL){
+        printf("%s",s->chunk);
+        s1=s1->next;
+    }
+    printf("\n");
     detruire_r(s);
 	return EXIT_SUCCESS;
 }
