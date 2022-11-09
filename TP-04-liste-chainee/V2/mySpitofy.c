@@ -16,18 +16,19 @@ Liste read_csv(char* file){
     Liste l;
     l=NULL;
     while(buffer[0]!= EOF ){
-        ajoutFin_r(creerElement(buffer));
+        ajoutFin_r(creerElement(buffer),l);
         fgets(buffer, 255, fr);
     }
     fclose(fr);
+    return l;
 }
 
-int main(int argc, char* argv[]){
+int main(){
 	Liste l;
 	l = NULL;
 	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
-    l=read_csv(argv[1])
+    l=read_csv("music.csv");
 
 
     afficheListe_r(l);

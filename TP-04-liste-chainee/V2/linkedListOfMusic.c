@@ -36,8 +36,8 @@ Element creerElement(char* ligne){
     ptr = strtok(NULL, delim);
     int y;
     sscanf(ptr, "%d", &y);
-    elem->year = ptr;
-    return elem
+    elem->year = y;
+    return elem;
 }
 
 bool equalsElement(Element e1, Element e2){

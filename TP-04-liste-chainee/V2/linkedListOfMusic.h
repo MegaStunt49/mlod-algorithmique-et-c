@@ -17,4 +17,6 @@ void afficheElement(Element e);
 
 void detruireElement(Element e);
 
+Element creerElement(char* ligne);
+
 bool equalsElement(Element e1, Element e2);
