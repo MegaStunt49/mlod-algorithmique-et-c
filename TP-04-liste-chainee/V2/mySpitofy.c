@@ -2,24 +2,31 @@
 #include "linkedListOfMusic.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
-int main(void){
+Liste read_csv(char* file){
+    FILE* fr;
+    fr = fopen(file,"r");
+    char buffer[255];
+    fgets(buffer, 255, fr);
+    fgets(buffer, 255, fr);
+    Liste l;
+    l=NULL;
+    while(buffer[0]!= EOF ){
+        ajoutFin_r(creerElement(buffer));
+        fgets(buffer, 255, fr);
+    }
+    fclose(fr);
+}
+
+int main(int argc, char* argv[]){
 	Liste l;
 	l = NULL;
 	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
-    Music* elem;
-    elem = malloc(sizeof(Music));
-    elem->artist = "bob";
-    elem->album = "wow";
-    elem->name = "lullaby";
-    elem->genre = "hard rock";
-    elem->diskNumber = 1;
-    elem->trackNumber = 1;
-    elem->year = 1969;
+    l=read_csv(argv[1])
 
-
-    l = ajoutTete(elem,l);
 
     afficheListe_r(l);
 
