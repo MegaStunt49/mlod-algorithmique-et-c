@@ -84,13 +84,13 @@ int main(void){
     String s = string_new("HELLO !");
     printf("%s%s\n",s->chunk,s->next->chunk);
     printf("%d\n",string_length(s));
-    s = string_insert_at(s,7,"les pros du C");
-    String s1=s;
-    while(s1!=NULL){
-        printf("%s",s->chunk);
-        s1=s1->next;
-    }
-    printf("\n");
+    // s = string_insert_at(s,7,"les pros du C");
+    // String s1=s;
+    // while(s1!=NULL){
+    //     printf("%s",s->chunk);
+    //     s1=s1->next;
+    // }
+    // printf("\n");
     detruire_r(s);
 	return EXIT_SUCCESS;
 }
