@@ -1,3 +1,5 @@
+// gcc -W -Wall -Wno-unused-parameter -std=c99 linkedList.c linkedListOfMusic.c mySpitofy.c -o mySpitofy
+
 #include "linkedList.h"
 #include "linkedListOfMusic.h"
 #include <stdlib.h>
