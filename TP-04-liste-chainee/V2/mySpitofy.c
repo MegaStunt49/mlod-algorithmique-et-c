@@ -27,13 +27,21 @@ Liste read_csv(char* file){
     return l;
 }
 
+Liste trier(Liste l){
+    if(l!=NULL){
+        if(l->suiv==NULL){return l;}
+        trier(l->suiv);
+        int annee;
+    }
+    return l;
+}
+
 int main(){
 	Liste l;
 	l = NULL;
 	printf("estVide(l) = %s\n",estVide(l)?"TRUE":"FALSE");
 
     l=read_csv("music.csv");
-
 
     afficheListe_r(l);
 
