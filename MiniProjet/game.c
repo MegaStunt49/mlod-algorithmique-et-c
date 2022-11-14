@@ -76,7 +76,7 @@ int main(void)
 {
     // Initialization (Note windowTitle is unused on Android)
     //---------------------------------------------------------
-    InitWindow(screenWidth, screenHeight, "classic game: asteroids");
+    InitWindow(screenWidth, screenHeight, "Jeu SuperCircles");
 
     InitGame();
 
@@ -266,7 +266,7 @@ void DrawGame(void)
             for (int i = 0; i < MAX_CIRCLES; i++)
             {
                 if (bigCircle[i].active) {
-                    DrawCircleSector(bigCircle[i].position, bigCircle[i].radius, bigCircle[i].angle.x, bigCircle[i].angle.y, 0, Fade(circo, 0.3f));
+                    DrawCircleSector(bigCircle[i].position, bigCircle[i].radius, bigCircle[i].angle.x, bigCircle[i].angle.y, 0, Fade(circo, 0.5f-(float)bigCircle[i].radius/((float)2*MAX_CIRCLES*ESPACE_CIRCLES)));
                 }
             }
 
