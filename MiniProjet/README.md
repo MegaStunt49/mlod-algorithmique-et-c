@@ -9,7 +9,7 @@ gcc -o game game.c -Wall -std=c11 /home/bot/Raylib.git/src/libraylib.a -lm -lrt 
 # Comment utiliser le projet
 2 fleches de direction pour déplacer un curseur et rentrer dans les entrées de cercles
 # URL vidéo de démo
-
+https://youtu.be/WGr5cU7td0o
 # Quelques détails sur votre implémentation
 
 # Extensions / améliorations possibles
