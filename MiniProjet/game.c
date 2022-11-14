@@ -12,10 +12,10 @@
 // Some Defines
 //----------------------------------------------------------------------------------
 #define PLAYER_BASE_SIZE    20.0f
-#define PLAYER_SPEED        6.0f
 #define PLAYER_DISTANCE     150
 
 #define MAX_CIRCLES     4
+#define ESPACE_CIRCLES  100
 
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
@@ -142,7 +142,7 @@ void InitGame(void)
         bigCircle[i].position = (Vector2){screenWidth/2, screenHeight/2};
         bigCircle[i].angle = (Vector2){posx, posy};
 
-        bigCircle[i].radius = i*(-100);
+        bigCircle[i].radius = i*(-1)*ESPACE_CIRCLES;
         bigCircle[i].active = false;
         bigCircle[i].color = BLUE;
     }
@@ -209,9 +209,9 @@ void UpdateGame(void)
             // Circles logic: big Circles
             for (int i = 0; i < MAX_CIRCLES; i++)
             {
-                if (bigCircle[i].radius==0) bigCircle[i].active=true;
+                if (bigCircle[i].radius>=0 && !bigCircle[i].active) bigCircle[i].active=true;
                 bigCircle[i].radius+=2;
-                if (bigCircle[i].radius>=100*MAX_CIRCLES)
+                if (bigCircle[i].radius>=ESPACE_CIRCLES*MAX_CIRCLES)
                 {
                     int r = GetRandomValue(0, 2);
                     int posx = GetRandomValue(0, 360);
