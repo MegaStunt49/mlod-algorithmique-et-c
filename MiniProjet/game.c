@@ -15,7 +15,7 @@
 #define PLAYER_SPEED        6.0f
 #define PLAYER_DISTANCE     150
 
-#define MAX_BIG_METEORS     4
+#define MAX_CIRCLES     4
 
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
@@ -28,13 +28,13 @@ typedef struct Player {
 } Player;
 
 
-typedef struct Meteor {
+typedef struct Circle {
     Vector2 position;
     float radius;
     Vector2 angle;
     bool active;
     Color color;
-} Meteor;
+} Circle;
 
 //------------------------------------------------------------------------------------
 // Global Variables Declaration
@@ -52,9 +52,9 @@ static bool victory = false;
 static float shipHeight = 0.0f;
 
 static Player player = { 0 };
-static Meteor bigMeteor[MAX_BIG_METEORS] = { 0 };
+static Circle bigCircle[MAX_CIRCLES] = { 0 };
 
-static int destroyedMeteorsCount = 0;
+static int destroyedCirclesCount = 0;
 
 //------------------------------------------------------------------------------------
 // Module Functions Declaration (local)
@@ -121,22 +121,22 @@ void InitGame(void)
     player.collider = (Vector3){player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight/2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight/2.5f), 12};
     player.color = LIGHTGRAY;
 
-    destroyedMeteorsCount = 0;
+    destroyedCirclesCount = 0;
 
     
 
-    for (int i = 0; i < MAX_BIG_METEORS; i++)
+    for (int i = 0; i < MAX_CIRCLES; i++)
     {   
         int r = GetRandomValue(0, 2);
         posx = GetRandomValue(0, 360);
         posy = posx+325-10*r;
 
-        bigMeteor[i].position = (Vector2){screenWidth/2, screenHeight/2};
-        bigMeteor[i].angle = (Vector2){posx, posy};
+        bigCircle[i].position = (Vector2){screenWidth/2, screenHeight/2};
+        bigCircle[i].angle = (Vector2){posx, posy};
 
-        bigMeteor[i].radius = i*(-100);
-        bigMeteor[i].active = false;
-        bigMeteor[i].color = BLUE;
+        bigCircle[i].radius = i*(-100);
+        bigCircle[i].active = false;
+        bigCircle[i].color = BLUE;
     }
 
 }
@@ -159,21 +159,21 @@ void UpdateGame(void)
             player.position.x = screenWidth/2 + PLAYER_DISTANCE*sin((-1)*player.rotation*DEG2RAD);
             player.position.y = screenHeight/2 + PLAYER_DISTANCE*cos((-1)*player.rotation*DEG2RAD);
 
-            // Collision logic: player vs meteors
+            // Collision logic: player vs Circles
             player.collider = (Vector3){player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight/2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight/2.5f), 12};
 
-            for (int a = 0; a < MAX_BIG_METEORS; a++)
+            for (int a = 0; a < MAX_CIRCLES; a++)
             {
                 bool angleConforme;
-                if (((int)bigMeteor[a].angle.x)%360>((int)bigMeteor[a].angle.y)%360){
-                    angleConforme = (360-(int)player.rotation)%360<((int)bigMeteor[a].angle.x)%360 && (360-(int)player.rotation)%360>((int)bigMeteor[a].angle.y)%360;
+                if (((int)bigCircle[a].angle.x)%360>((int)bigCircle[a].angle.y)%360){
+                    angleConforme = (360-(int)player.rotation)%360<((int)bigCircle[a].angle.x)%360 && (360-(int)player.rotation)%360>((int)bigCircle[a].angle.y)%360;
                 }
                 else{
-                    angleConforme = (360-(int)player.rotation)%360<((int)bigMeteor[a].angle.x)%360 || (360-(int)player.rotation)%360>((int)bigMeteor[a].angle.y)%360;
+                    angleConforme = (360-(int)player.rotation)%360<((int)bigCircle[a].angle.x)%360 || (360-(int)player.rotation)%360>((int)bigCircle[a].angle.y)%360;
                 }
-                if (CheckCollisionCircles((Vector2){player.collider.x, player.collider.y}, player.collider.z, bigMeteor[a].position, bigMeteor[a].radius) && bigMeteor[a].active && bigMeteor[a].radius<155){
+                if (CheckCollisionCircles((Vector2){player.collider.x, player.collider.y}, player.collider.z, bigCircle[a].position, bigCircle[a].radius) && bigCircle[a].active && bigCircle[a].radius<155){
                     if (angleConforme){
-                        if (score%MAX_BIG_METEORS==a) score++;
+                        if (score%MAX_CIRCLES==a) score++;
                         if (score>highScore) highScore=score;
                     }
                     else{
@@ -182,26 +182,26 @@ void UpdateGame(void)
                 }
             }
 
-            // Meteors logic: big meteors
-            for (int i = 0; i < MAX_BIG_METEORS; i++)
+            // Circles logic: big Circles
+            for (int i = 0; i < MAX_CIRCLES; i++)
             {
-                if (bigMeteor[i].radius==0) bigMeteor[i].active=true;
-                bigMeteor[i].radius+=2;
-                if (bigMeteor[i].radius>=400)
+                if (bigCircle[i].radius==0) bigCircle[i].active=true;
+                bigCircle[i].radius+=2;
+                if (bigCircle[i].radius>=100*MAX_CIRCLES)
                 {
                     int r = GetRandomValue(0, 2);
                     int posx = GetRandomValue(0, 360);
                     int posy = posx+325-10*r;
 
-                    bigMeteor[i].position = (Vector2){screenWidth/2, screenHeight/2};
-                    bigMeteor[i].angle = (Vector2){posx, posy};
+                    bigCircle[i].position = (Vector2){screenWidth/2, screenHeight/2};
+                    bigCircle[i].angle = (Vector2){posx, posy};
 
-                    bigMeteor[i].radius = 0;
+                    bigCircle[i].radius = 0;
 
                 }
             }
         }
-        if (IsKeyPressed('P')) printf("%d\n%d\n%d\n",(int)bigMeteor[0].angle.x,(int)bigMeteor[0].angle.y,(int)player.rotation);
+        if (IsKeyPressed('P')) printf("%d\n%d\n%d\n",(int)bigCircle[0].angle.x,(int)bigCircle[0].angle.y,(int)player.rotation);
 
     }
     else
@@ -238,11 +238,11 @@ void DrawGame(void)
             DrawText(str, 20, 20, 20, GRAY);
             DrawText(str2, 20, 50, 20, DARKGRAY);
 
-            // Draw meteors
-            for (int i = 0; i < MAX_BIG_METEORS; i++)
+            // Draw Circles
+            for (int i = 0; i < MAX_CIRCLES; i++)
             {
-                if (bigMeteor[i].active) {
-                    DrawCircleSector(bigMeteor[i].position, bigMeteor[i].radius, bigMeteor[i].angle.x, bigMeteor[i].angle.y, 0, Fade(DARKGRAY, 0.3f));
+                if (bigCircle[i].active) {
+                    DrawCircleSector(bigCircle[i].position, bigCircle[i].radius, bigCircle[i].angle.x, bigCircle[i].angle.y, 0, Fade(DARKGRAY, 0.3f));
                 }
             }
 
