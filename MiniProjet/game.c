@@ -46,7 +46,12 @@ static int score = 0;
 static int highScore = 0;
 static bool gameOver = false;
 static bool pause = false;
-static bool victory = false;
+static Color bgco = RAYWHITE;
+static Color circo = DARKGRAY;
+static Color scoco = GRAY;
+static Color shico = MAROON;
+
+static int inversion = 1;
 
 // NOTE: Defined triangle is isosceles with common angles of 70 degrees.
 static float shipHeight = 0.0f;
@@ -54,7 +59,6 @@ static float shipHeight = 0.0f;
 static Player player = { 0 };
 static Circle bigCircle[MAX_CIRCLES] = { 0 };
 
-static int destroyedCirclesCount = 0;
 
 //------------------------------------------------------------------------------------
 // Module Functions Declaration (local)
@@ -109,9 +113,15 @@ int main(void)
 void InitGame(void)
 {
     int posx, posy;
-    victory = false;
     score = 0;
     pause = false;
+
+    inversion = 1;
+
+    bgco = RAYWHITE;
+    circo = DARKGRAY;
+    scoco = GRAY;
+    shico = MAROON;
 
     shipHeight = (PLAYER_BASE_SIZE/2)/tanf(20*DEG2RAD);
 
@@ -120,8 +130,6 @@ void InitGame(void)
     player.rotation = 0;
     player.collider = (Vector3){player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight/2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight/2.5f), 12};
     player.color = LIGHTGRAY;
-
-    destroyedCirclesCount = 0;
 
     
 
@@ -151,8 +159,8 @@ void UpdateGame(void)
         if (!pause)
         {
             // Player logic: rotation
-            if (IsKeyDown(KEY_LEFT)) player.rotation -= 5;
-            if (IsKeyDown(KEY_RIGHT)) player.rotation += 5;
+            if (IsKeyDown(KEY_LEFT)) player.rotation -= inversion*5;
+            if (IsKeyDown(KEY_RIGHT)) player.rotation += inversion*5;
 
 
             // Player logic: movement
@@ -173,8 +181,24 @@ void UpdateGame(void)
                 }
                 if (CheckCollisionCircles((Vector2){player.collider.x, player.collider.y}, player.collider.z, bigCircle[a].position, bigCircle[a].radius) && bigCircle[a].active && bigCircle[a].radius<155){
                     if (angleConforme){
-                        if (score%MAX_CIRCLES==a) score++;
-                        if (score>highScore) highScore=score;
+                        if (score%MAX_CIRCLES==a) {
+                            score++;
+                            if (score>highScore) highScore=score;
+                            if (score%20==10) {
+                                bgco = RED;
+                                circo = RAYWHITE;
+                                shico = DARKGRAY;
+                                scoco = Fade(RAYWHITE, 0.7f);
+                                inversion = (-1);
+                            }
+                            if (score%20==0) {
+                                bgco = RAYWHITE;
+                                circo = DARKGRAY;
+                                shico = MAROON;
+                                scoco = GRAY;
+                                inversion = 1;
+                            }
+                        }
                     }
                     else{
                         gameOver = true;
@@ -219,7 +243,7 @@ void DrawGame(void)
 {
     BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(bgco);
 
         char str[28];
         char StrScore[20];
@@ -235,14 +259,14 @@ void DrawGame(void)
         
         if (!gameOver)
         {
-            DrawText(str, 20, 20, 20, GRAY);
-            DrawText(str2, 20, 50, 20, DARKGRAY);
+            DrawText(str, 20, 20, 20, scoco);
+            DrawText(str2, 20, 50, 20, circo);
 
             // Draw Circles
             for (int i = 0; i < MAX_CIRCLES; i++)
             {
                 if (bigCircle[i].active) {
-                    DrawCircleSector(bigCircle[i].position, bigCircle[i].radius, bigCircle[i].angle.x, bigCircle[i].angle.y, 0, Fade(DARKGRAY, 0.3f));
+                    DrawCircleSector(bigCircle[i].position, bigCircle[i].radius, bigCircle[i].angle.x, bigCircle[i].angle.y, 0, Fade(circo, 0.3f));
                 }
             }
 
@@ -250,15 +274,15 @@ void DrawGame(void)
             Vector2 v1 = { player.position.x + sinf(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cosf(player.rotation*DEG2RAD)*(shipHeight) };
             Vector2 v2 = { player.position.x - cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2), player.position.y - sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2) };
             Vector2 v3 = { player.position.x + cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2), player.position.y + sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE/2) };
-            DrawTriangle(v1, v2, v3, MAROON);
+            DrawTriangle(v1, v2, v3, shico);
 
 
-            if (pause) DrawText("GAME PAUSED", screenWidth/2 - MeasureText("GAME PAUSED", 40)/2, screenHeight/2 - 40, 40, GRAY);
+            if (pause) DrawText("GAME PAUSED", screenWidth/2 - MeasureText("GAME PAUSED", 40)/2, screenHeight/2 - 40, 40, scoco);
         }
         else {
-            DrawText(str2, GetScreenWidth()/2 - MeasureText("HIGHSCORE : 10", 20)/2, GetScreenHeight()/2 - 110, 20, DARKGRAY);
-            DrawText(str, GetScreenWidth()/2 - MeasureText("SCORE : 10", 20)/2, GetScreenHeight()/2 - 80, 20, GRAY);
-            DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth()/2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20)/2, GetScreenHeight()/2 - 50, 20, GRAY);
+            DrawText(str2, GetScreenWidth()/2 - MeasureText("HIGHSCORE : 10", 20)/2, GetScreenHeight()/2 - 110, 20, circo);
+            DrawText(str, GetScreenWidth()/2 - MeasureText("SCORE : 10", 20)/2, GetScreenHeight()/2 - 80, 20, scoco);
+            DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth()/2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20)/2, GetScreenHeight()/2 - 50, 20, scoco);
         }
 
     EndDrawing();
