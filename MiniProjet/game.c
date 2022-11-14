@@ -1,3 +1,4 @@
+//gcc -o game game.c -Wall -std=c11 /home/bot/Raylib.git/src/libraylib.a -lm -lrt -ldl -lX11 -lGL -lpthread
 
 #include "raylib.h"
 
@@ -6,9 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// #if defined(PLATFORM_WEB)
-//     #include <emscripten/emscripten.h>
-// #endif
 
 //----------------------------------------------------------------------------------
 // Some Defines
@@ -17,10 +15,7 @@
 #define PLAYER_SPEED        6.0f
 #define PLAYER_DISTANCE     150
 
-#define METEORS_SPEED       2
 #define MAX_BIG_METEORS     4
-#define MAX_MEDIUM_METEORS  8
-#define MAX_SMALL_METEORS   16
 
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
@@ -48,6 +43,7 @@ static const int screenWidth = 1000;
 static const int screenHeight = 1000;
 
 static int score = 0;
+static int highScore = 0;
 static bool gameOver = false;
 static bool pause = false;
 static bool victory = false;
@@ -178,6 +174,7 @@ void UpdateGame(void)
                 if (CheckCollisionCircles((Vector2){player.collider.x, player.collider.y}, player.collider.z, bigMeteor[a].position, bigMeteor[a].radius) && bigMeteor[a].active && bigMeteor[a].radius<155){
                     if (angleConforme){
                         if (score%MAX_BIG_METEORS==a) score++;
+                        if (score>highScore) highScore=score;
                     }
                     else{
                         gameOver = true;
@@ -206,7 +203,6 @@ void UpdateGame(void)
         }
         if (IsKeyPressed('P')) printf("%d\n%d\n%d\n",(int)bigMeteor[0].angle.x,(int)bigMeteor[0].angle.y,(int)player.rotation);
 
-        if (destroyedMeteorsCount == MAX_BIG_METEORS + MAX_MEDIUM_METEORS + MAX_SMALL_METEORS) victory = true;
     }
     else
     {
@@ -225,8 +221,22 @@ void DrawGame(void)
 
         ClearBackground(RAYWHITE);
 
+        char str[28];
+        char StrScore[20];
+        sprintf(StrScore, "%d", score);
+        strcpy(str, "SCORE : ");
+        strcat(str, StrScore);
+
+        char str2[28];
+        char StrScore2[20];
+        sprintf(StrScore2, "%d", highScore);
+        strcpy(str2, "HIGHSCORE : ");
+        strcat(str2, StrScore2);
+        
         if (!gameOver)
         {
+            DrawText(str, 20, 20, 20, GRAY);
+            DrawText(str2, 20, 50, 20, DARKGRAY);
 
             // Draw meteors
             for (int i = 0; i < MAX_BIG_METEORS; i++)
@@ -246,11 +256,7 @@ void DrawGame(void)
             if (pause) DrawText("GAME PAUSED", screenWidth/2 - MeasureText("GAME PAUSED", 40)/2, screenHeight/2 - 40, 40, GRAY);
         }
         else {
-            char str[28];
-            char StrScore[20];
-            sprintf(StrScore, "%d", score);
-            strcpy(str, "SCORE : ");
-            strcat(str, StrScore);
+            DrawText(str2, GetScreenWidth()/2 - MeasureText("HIGHSCORE : 10", 20)/2, GetScreenHeight()/2 - 110, 20, DARKGRAY);
             DrawText(str, GetScreenWidth()/2 - MeasureText("SCORE : 10", 20)/2, GetScreenHeight()/2 - 80, 20, GRAY);
             DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth()/2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20)/2, GetScreenHeight()/2 - 50, 20, GRAY);
         }
